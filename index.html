@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WEEK</title>
+    <!-- Bootstrap -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>    
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>    	  
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+  <script src="mainapp.js"></script>
+  <script src="support.js"></script>
+	<link rel="stylesheet" href="schedule.css">
+
+
+  </head>
+	<body ng-app="two" ng-controller = 'TwoCtrl'>
+
+<div class="user_note">
+	<textarea id="unote" placeholder="Please add note" ng-model="userNote" ng-blur="note_done()"></textarea>
+</div>
+
+<div id="left-nav">
+	<ul class="text-center">
+		<li><a href="schedule.html"><i class="fa fa-home"></i></a></li>
+		<li><a href="edit.html"><i class="fa fa-cogs"></i></a></li>
+		<li><a class="note_btn"><i class="fa fa-user"></i></a></li>
+		<li><a href="diary.html"><i class="fa fa-calendar"></i></a></li>
+		<li><a><i class="fa fa-sign-out"></i></a></li>
+	</ul>
+</div>
+<div id="wrap">
+	<div id="main-header">
+		<span class="float-left"><h1>Gentle Week</h1></span>
+		<span class="float-right"><h5>Hi Yohan</h5></span>
+	</div>
+	<div id="main-body">
+		<div id="status-area">
+				<div class="status-ele">March 18, 2018</div>
+				<div id="time" class="status-ele">3hr 20m 21s left today</div>
+				<div id="perc" class="status-ele"></div>			
+		</div>
+		<div id="week-wrap">
+				<p class="f-20 text-center py-4 border-b">March 1st Week</p>
+
+				<div id="day1" class="week-day">
+					<gray>Sun 03/01</gray><hr>
+					<form>
+					<div ng-repeat = "task in tasks_sun track by $index"> 						
+						<div class="w-element">
+							<div class="del-btn" ng-click="remove(task, 'sun')"></div>							
+							<h5><input type="text" class="input-title" ng-model="task.title" ng-blur="update('sun')"></h5>
+							<p><h6 class="text-right"><input type="text" class="input-num" ng-model="task.qty" ng-blur="update('sun')"> / <input type="text" class="input-num"  ng-model="task.total" ng-blur="update('sun')"></h6></p>
+							<p class="ele-bar"><span style="width:{{ task.qty / task.total * 100 }}%"></span></p>
+						</div>
+					</div>				
+
+					<div class="w-element i-hide">
+						<p class="text-right">
+							<input type="text" class="input-add" placeholder="NAME OF NEW TASK" ng-model="newTask_sun">
+							<input type="text" class="input-add" placeholder="TOTAL QUANTITY" ng-model="newTotal_sun">
+							<button type="button" class="input-btn" ng-click="add(newTask_sun, newTotal_sun, 'sun')">ADD NEW TASK<i class="fa fa-plus"></i></button></p>
+					</div>
+					</form>
+				</div>
+
+
+				<div id="day2" class="week-day"><gray>Mon 03/02</gray><hr>
+					<form>
+					<div ng-repeat = "task in tasks_mon track by $index"> 						
+						<div class="w-element">
+							<div class="del-btn" ng-click="remove(task, 'mon')"></div>							
+							<h5><input type="text" class="input-title" ng-model="task.title" ng-blur="update('mon')"></h5>
+							<p><h6 class="text-right"><input type="text" class="input-num" ng-model="task.qty" ng-blur="update('mon')"> / <input type="text" class="input-num"  ng-model="task.total" ng-blur="update('sun')"></h6></p>
+							<p class="ele-bar"><span style="width:{{ task.qty / task.total * 100 }}%"></span></p>
+						</div>
+					</div>		
+					<div class="w-element i-hide">
+						<p class="text-right">
+							<input type="text" class="input-add" placeholder="NAME OF NEW TASK" ng-model="newTask_mon">
+							<input type="text" class="input-add" placeholder="TOTAL QUANTITY" ng-model="newTotal_mon">
+							<button type="button" class="input-btn" ng-click="add(newTask_mon, newTotal_mon, 'mon')">ADD NEW TASK<i class="fa fa-plus"></i></button></p>
+					</div>	
+					</form>			
+				</div>
+
+				<div id="day3" class="week-day"><gray>Tue 03/03</gray><hr>
+					<form>
+					<div ng-repeat = "task in tasks_tue track by $index"> 						
+						<div class="w-element">
+							<div class="del-btn" ng-click="remove(task, 'tue')"></div>							
+							<h5><input type="text" class="input-title" ng-model="task.title" ng-blur="update('tue')"></h5>
+							<p><h6 class="text-right"><input type="text" class="input-num" ng-model="task.qty" ng-blur="update('tue')"> / <input type="text" class="input-num"  ng-model="task.total" ng-blur="update('sun')"></h6></p>
+							<p class="ele-bar"><span style="width:{{ task.qty / task.total * 100 }}%"></span></p>
+						</div>
+					</div>						
+					<div class="w-element i-hide">
+						<p class="text-right">
+							<input type="text" class="input-add" placeholder="NAME OF NEW TASK" ng-model="newTask_tue">
+							<input type="text" class="input-add" placeholder="TOTAL QUANTITY" ng-model="newTotal_tue">
+							<button type="button" class="input-btn" ng-click="add(newTask_tue, newTotal_tue, 'tue')">ADD NEW TASK<i class="fa fa-plus"></i></button></p>
+					</div>
+					</form>
+				</div>
+
+
+				<div id="day4" class="week-day"><gray>Wed 03/04</gray><hr>
+					<form>
+					<div ng-repeat = "task in tasks_wed track by $index"> 						
+						<div class="w-element">
+							<div class="del-btn" ng-click="remove(task, 'wed')"></div>							
+							<h5><input type="text" class="input-title" ng-model="task.title" ng-blur="update('wed')"></h5>
+							<p><h6 class="text-right"><input type="text" class="input-num" ng-model="task.qty" ng-blur="update('wed')"> / <input type="text" class="input-num"  ng-model="task.total" ng-blur="update('sun')"></h6></p>
+							<p class="ele-bar"><span style="width:{{ task.qty / task.total * 100 }}%"></span></p>
+						</div>
+					</div>						
+					<div class="w-element i-hide">
+						<p class="text-right">
+							<input type="text" class="input-add" placeholder="NAME OF NEW TASK" ng-model="newTask_wed">
+							<input type="text" class="input-add" placeholder="TOTAL QUANTITY" ng-model="newTotal_wed">
+							<button type="button" class="input-btn" ng-click="add(newTask_wed, newTotal_wed, 'wed')">ADD NEW TASK<i class="fa fa-plus"></i></button></p>
+					</div>				
+					</form>
+				</div>
+
+				<div id="day5" class="week-day"><gray>Thu 03/05</gray><hr>
+					<form>
+					<div ng-repeat = "task in tasks_thu track by $index"> 						
+						<div class="w-element">
+							<div class="del-btn" ng-click="remove(task, 'thu')"></div>							
+							<h5><input type="text" class="input-title" ng-model="task.title" ng-blur="update('thu')"></h5>
+							<p><h6 class="text-right"><input type="text" class="input-num" ng-model="task.qty" ng-blur="update('thu')"> / <input type="text" class="input-num"  ng-model="task.total" ng-blur="update('sun')"></h6></p>
+							<p class="ele-bar"><span style="width:{{ task.qty / task.total * 100 }}%"></span></p>
+						</div>
+					</div>						
+					<div class="w-element i-hide">
+						<p class="text-right">
+							<input type="text" class="input-add" placeholder="NAME OF NEW TASK" ng-model="newTask_thu">
+							<input type="text" class="input-add" placeholder="TOTAL QUANTITY" ng-model="newTotal_thu">
+							<button type="button" class="input-btn" ng-click="add(newTask_thu, newTotal_thu, 'thu')">ADD NEW TASK<i class="fa fa-plus"></i></button></p>
+					</div>
+					</form>
+				</div>
+
+				<div id="day6" class="week-day"><gray>Fri 03/06</gray><hr>
+					<form>
+					<div ng-repeat = "task in tasks_fri track by $index"> 						
+						<div class="w-element">
+							<div class="del-btn" ng-click="remove(task, 'fri')"></div>							
+							<h5><input type="text" class="input-title" ng-model="task.title" ng-blur="update('fri')"></h5>
+							<p><h6 class="text-right"><input type="text" class="input-num" ng-model="task.qty" ng-blur="update('fri')"> / <input type="text" class="input-num"  ng-model="task.total" ng-blur="update('sun')"></h6></p>
+							<p class="ele-bar"><span style="width:{{ task.qty / task.total * 100 }}%"></span></p>
+						</div>
+					</div>						
+					<div class="w-element i-hide">
+						<p class="text-right">
+							<input type="text" class="input-add" placeholder="NAME OF NEW TASK" ng-model="newTask_fri">
+							<input type="text" class="input-add" placeholder="TOTAL QUANTITY" ng-model="newTotal_fri">
+							<button type="button" class="input-btn" ng-click="add(newTask_fri, newTotal_fri, 'fri')">ADD NEW TASK<i class="fa fa-plus"></i></button></p>
+					</div>	
+					</form>		
+				</div>
+
+				<div id="day7" class="week-day"><gray>Sat 03/07</gray><hr>
+					<form>
+					<div ng-repeat = "task in tasks_sat track by $index"> 						
+						<div class="w-element">
+							<div class="del-btn" ng-click="remove(task, 'sat')"></div>
+							<h5><input type="text" class="input-title" ng-model="task.title" ng-blur="update('sat')"></h5>
+							<p><h6 class="text-right"><input type="text" class="input-num" ng-model="task.qty" ng-blur="update('sat')"> / <input type="text" class="input-num"  ng-model="task.total" ng-blur="update('sun')"></h6></p>
+							<p class="ele-bar"><span style="width:{{ task.qty / task.total * 100 }}%"></span></p>
+						</div>
+					</div>						
+					<div class="w-element i-hide">
+						<p class="text-right">
+							<input type="text" class="input-add" placeholder="NAME OF NEW TASK" ng-model="newTask_sat">
+							<input type="text" class="input-add" placeholder="TOTAL QUANTITY" ng-model="newTotal_sat">
+							<button type="button" class="input-btn" ng-click="add(newTask_sat, newTotal_sat, 'sat')">ADD NEW TASK<i class="fa fa-plus"></i></button></p>
+					</div>
+					</form>
+				</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+</body>
+</html>
